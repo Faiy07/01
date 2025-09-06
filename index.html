@@ -3,949 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Dear Friend!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Happy Birthday! 🎉</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #fff6f6 0%, #fef8ff 100%);
-            color: #5a4b81;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Loading State */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #fff6f6 0%, #fef8ff 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #ff6b6b;
-            border-top: 3px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            color: #ff6b6b;
-            font-family: 'Pacifico', cursive;
-            font-size: 1.2rem;
-        }
-
-        .section {
-            min-height: 100vh;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-            position: relative;
-        }
-
-        .visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h1, h2 {
-            font-family: 'Pacifico', cursive;
-            margin-bottom: 1.5rem;
-            color: #ff6b6b;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        p {
-            margin-bottom: 1rem;
-            max-width: 600px;
-            font-size: 1.1rem;
-        }
-
-        /* Landing Section */
-        #landing {
-            background: linear-gradient(120deg, #f8d5e6 0%, #d5e8f8 100%);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .parallax-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(124, 196, 207, 0.1) 0%, transparent 50%);
-            will-change: transform;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-
-        .typewriter {
-            overflow: hidden;
-            border-right: .15em solid #ff6b6b;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .1em;
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #ff6b6b; }
-        }
-
-        .hearts-landing {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .heart {
-            position: absolute;
-            font-size: 1.5rem;
-            color: #ff6b6b;
-            opacity: 0.7;
-            animation: floatHeart 8s ease-in-out infinite;
-        }
-
-        @keyframes floatHeart {
-            0%, 100% { 
-                transform: translate(0, 0) rotate(0deg) scale(1); 
-                opacity: 0.7;
-            }
-            25% { 
-                transform: translate(30px, -40px) rotate(10deg) scale(1.1); 
-                opacity: 0.9;
-            }
-            50% { 
-                transform: translate(-20px, -80px) rotate(-10deg) scale(0.9); 
-                opacity: 0.6;
-            }
-            75% { 
-                transform: translate(-30px, -40px) rotate(5deg) scale(1.05); 
-                opacity: 0.8;
-            }
-        }
-
-        .bounce-arrow {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2rem;
-            color: #ff6b6b;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .bounce-arrow:hover {
-            transform: translateX(-50%) scale(1.2);
-            color: #ff5252;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-
-        /* Memories Section */
-        #memories {
-            background-color: #f8f4ff;
-        }
-
-        .memory-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            height: 300px;
-            margin: 2rem auto;
-            perspective: 1000px;
-        }
-
-        .memory {
-            position: absolute;
-            width: 100%;
-            padding: 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: rotateY(90deg) translateX(50px);
-            transition: all 0.8s ease;
-            backface-visibility: hidden;
-        }
-
-        .memory.active {
-            opacity: 1;
-            transform: rotateY(0deg) translateX(0);
-            z-index: 2;
-        }
-
-        .memory-btn {
-            margin-top: 1rem;
-            padding: 0.8rem 1.5rem;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-            z-index: 10;
-        }
-
-        .memory-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
-        }
-
-        /* Personal Note Section */
-        #personal-note {
-            background: linear-gradient(45deg, #e3f2ff 0%, #ffe8f7 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .note-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 2.5rem;
-            border-radius: 20px;
-            max-width: 700px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 2;
-            transform: translateY(20px);
-            animation: floatUp 1s ease forwards 0.5s;
-        }
-
-        @keyframes floatUp {
-            to {
-                transform: translateY(0);
-            }
-        }
-
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-            50% { transform: translateY(-20px) rotate(20deg); opacity: 1; }
-        }
-
-        .hearts-note {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .heart-note {
-            position: absolute;
-            font-size: 1.2rem;
-            color: #ff6b6b;
-            opacity: 0;
-            animation: pulseHeart 4s ease-in-out infinite;
-        }
-
-        @keyframes pulseHeart {
-            0%, 100% { 
-                transform: scale(1); 
-                opacity: 0;
-            }
-            50% { 
-                transform: scale(1.3); 
-                opacity: 0.8;
-            }
-        }
-
-        /* Closing Section */
-        #closing {
-            background: linear-gradient(135deg, #ffe8e8 0%, #e8f4ff 100%);
-            overflow: hidden;
-        }
-
-        .celebrate-btn {
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, #ff6b6b, #ffa36c);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-top: 2rem;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 500;
-            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 5;
-        }
-
-        .celebrate-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 25px rgba(255, 107, 107, 0.4);
-        }
-
-        .celebrate-btn::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        .confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        .floating-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .floating-heart {
-            position: absolute;
-            font-size: 1.5rem;
-            color: #ff6b6b;
-            opacity: 0;
-            animation: floatUpHearts 10s ease-in infinite;
-        }
-
-        @keyframes floatUpHearts {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0.7;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Navigation Dots */
-        .nav-dots {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            margin: 10px 0;
-            border-radius: 50%;
-            background-color: #ffa36c;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0.5;
-        }
-
-        .dot.active {
-            opacity: 1;
-            transform: scale(1.3);
-            background-color: #ff6b6b;
-        }
-
-        /* Mobile Touch Improvements */
-        .memory-btn, .celebrate-btn, .bounce-arrow {
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-
-        .memory-btn:active, .celebrate-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .section {
-                padding: 1.5rem;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            .note-container {
-                padding: 1.5rem;
-            }
-            
-            .memory-container {
-                height: 350px;
-            }
-            
-            .nav-dots {
-                right: 15px;
-            }
-            
-            .dot {
-                width: 10px;
-                height: 10px;
-                margin: 8px 0;
-            }
-
-            .bounce-arrow {
-                font-size: 1.5rem;
-                bottom: 1.5rem;
-            }
-
-            .typewriter {
-                font-size: 1.5rem;
-            }
-
-            .memory-btn, .celebrate-btn {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .section {
-                padding: 1rem;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            h2 {
-                font-size: 1.3rem;
-            }
-            
-            .note-container {
-                padding: 1rem;
-            }
-            
-            .memory-container {
-                height: 300px;
-            }
-        }
-    </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loading">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Loading your special surprise...</div>
-    </div>
-
-    <!-- Navigation Dots -->
-    <div class="nav-dots">
-        <div class="dot active" data-section="landing"></div>
-        <div class="dot" data-section="memories"></div>
-        <div class="dot" data-section="personal-note"></div>
-        <div class="dot" data-section="closing"></div>
-    </div>
-
     <!-- Landing Section -->
-    <section id="landing" class="section">
-        <div class="parallax-bg"></div>
-        <div class="hearts-landing" id="hearts-landing"></div>
-        <h1 class="typewriter">Happy Birthday, My Dear Friend!</h1>
-        <p>I created something special just for you on your special day.</p>
-        <p>Scroll down to begin this little journey of memories...</p>
-        <div class="bounce-arrow">▼</div>
-    </section>
-
-    <!-- Memories Section -->
-    <section id="memories" class="section">
-        <h2>Little Things I Cherish About You</h2>
-        <div class="memory-container">
-            <div class="memory active">
-                <p>Remember that time we stayed up until 3 AM talking about everything and nothing? Your laughter that night is something I'll always treasure.</p>
-                <div class="memory-heart">❤️</div>
+    <section class="landing-section">
+        <div class="landing-content">
+            <div class="birthday-text">
+                <h1 class="main-title">Happy Birthday</h1>
+                <h2 class="friend-name">Sarah</h2>
+                <div class="celebration-emoji">🎉</div>
             </div>
-            <div class="memory">
-                <p>How you always know exactly when I need a hug, even when I don't say anything. Your empathy amazes me.</p>
-                <div class="memory-heart">❤️</div>
-            </div>
-            <div class="memory">
-                <p>That ridiculous inside joke we have about pineapples that still makes us laugh uncontrollably.</p>
-                <div class="memory-heart">❤️</div>
-            </div>
-            <div class="memory">
-                <p>The way your eyes light up when you talk about things you're passionate about. It's contagious!</p>
-                <div class="memory-heart">❤️</div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+                <p>Scroll to discover</p>
             </div>
         </div>
-        <button class="memory-btn">Next Memory →</button>
-    </section>
-
-    <!-- Personal Note Section -->
-    <section id="personal-note" class="section">
-        <div class="stars"></div>
-        <div class="hearts-note" id="hearts-note"></div>
-        <div class="note-container">
-            <h2>A Note Just For You</h2>
-            <p>My dearest friend,</p>
-            <p>On this special day, I want you to know how incredibly grateful I am to have you in my life. Your kindness, humor, and beautiful spirit have made my world brighter in countless ways.</p>
-            <p>You have this amazing ability to make ordinary moments extraordinary, and I cherish every memory we've created together.</p>
-            <p>As you celebrate today, I hope you feel all the love and joy you bring to others reflected back to you tenfold. You deserve nothing less than absolute happiness.</p>
-            <p>Thank you for being you, and for sharing your light with the world.</p>
-            <p>With all my love,</p>
-            <p>Your best friend</p>
+        <div class="floating-hearts">
+            <div class="heart">💖</div>
+            <div class="heart">💕</div>
+            <div class="heart">💗</div>
+            <div class="heart">💝</div>
+            <div class="heart">💖</div>
         </div>
     </section>
 
-    <!-- Closing Section -->
-    <section id="closing" class="section">
-        <div class="floating-hearts" id="floating-hearts"></div>
-        <h2>Wishing You the Most Wonderful Birthday!</h2>
-        <p>May your day be filled with joy, laughter, and all the things you love most.</p>
-        <button class="celebrate-btn">Celebrate!</button>
+    <!-- Memory Sections -->
+    <section class="memory-section" data-bg="light-pink">
+        <div class="memory-content">
+            <div class="memory-text">
+                <h3>Remember when...</h3>
+                <p>We stayed up all night talking about our dreams and laughing until our stomachs hurt? Those moments are pure magic ✨</p>
+            </div>
+        </div>
     </section>
 
-    <div class="confetti" id="confetti"></div>
+    <section class="memory-section" data-bg="light-blue">
+        <div class="memory-content">
+            <div class="memory-text">
+                <h3>You are amazing because...</h3>
+                <p>Your kindness lights up every room you enter. You make everyone feel special and loved, just by being you 💫</p>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hide loading screen after everything is loaded
-            const loading = document.getElementById('loading');
-            setTimeout(() => {
-                loading.classList.add('hidden');
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 500);
-            }, 1500);
-            
-            // Register ScrollTrigger plugin
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Section reveal on scroll
-            const sections = document.querySelectorAll('.section');
-            const dots = document.querySelectorAll('.dot');
-            
-            const revealSection = function(entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('visible');
-                    
-                    // Update navigation dots
-                    const sectionId = entry.target.id;
-                    dots.forEach(dot => {
-                        dot.classList.remove('active');
-                        if (dot.dataset.section === sectionId) {
-                            dot.classList.add('active');
-                        }
-                    });
-                });
-            };
-            
-            const sectionObserver = new IntersectionObserver(revealSection, {
-                root: null,
-                threshold: 0.15,
-            });
-            
-            sections.forEach(section => {
-                sectionObserver.observe(section);
-            });
-            
-            // Make first section visible immediately
-            document.getElementById('landing').classList.add('visible');
-            
-            // GSAP ScrollTrigger animations
-            // Parallax background effect
-            gsap.to('.parallax-bg', {
-                yPercent: -50,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: '#landing',
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-            
-            // Enhanced section reveals with GSAP
-            sections.forEach((section, index) => {
-                gsap.fromTo(section, 
-                    { 
-                        opacity: 0, 
-                        y: 50,
-                        scale: 0.95
-                    },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        duration: 1,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 80%",
-                            end: "bottom 20%",
-                            toggleActions: "play none none reverse"
-                        }
-                    }
-                );
-            });
-            
-            // Memory cards animation
-            gsap.fromTo('.memory', 
-                { 
-                    opacity: 0, 
-                    rotationY: 90,
-                    x: 100
-                },
-                {
-                    opacity: 1,
-                    rotationY: 0,
-                    x: 0,
-                    duration: 0.8,
-                    ease: "back.out(1.7)",
-                    scrollTrigger: {
-                        trigger: '#memories',
-                        start: "top 70%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-            
-            // Note container animation
-            gsap.fromTo('.note-container', 
-                { 
-                    opacity: 0, 
-                    y: 100,
-                    rotation: 5
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    rotation: 0,
-                    duration: 1.2,
-                    ease: "elastic.out(1, 0.3)",
-                    scrollTrigger: {
-                        trigger: '#personal-note',
-                        start: "top 70%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-            
-            // Navigation dots functionality
-            dots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const sectionId = this.dataset.section;
-                    const section = document.getElementById(sectionId);
-                    section.scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-            
-            // Create floating hearts in landing section
-            const heartsLanding = document.getElementById('hearts-landing');
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '❤';
-                heart.style.left = `${Math.random() * 100}%`;
-                heart.style.top = `${Math.random() * 100}%`;
-                heart.style.animationDelay = `${Math.random() * 5}s`;
-                heartsLanding.appendChild(heart);
-            }
-            
-            // Create pulsing hearts in note section
-            const heartsNote = document.getElementById('hearts-note');
-            for (let i = 0; i < 20; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-note');
-                heart.innerHTML = '❤';
-                heart.style.left = `${Math.random() * 100}%`;
-                heart.style.top = `${Math.random() * 100}%`;
-                heart.style.animationDelay = `${Math.random() * 4}s`;
-                heartsNote.appendChild(heart);
-            }
-            
-            // Create floating hearts in closing section
-            const floatingHearts = document.getElementById('floating-hearts');
-            for (let i = 0; i < 10; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('floating-heart');
-                heart.innerHTML = '❤';
-                heart.style.left = `${Math.random() * 100}%`;
-                heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
-                heart.style.animationDelay = `${Math.random() * 5}s`;
-                floatingHearts.appendChild(heart);
-            }
-            
-            // Memory carousel
-            const memories = document.querySelectorAll('.memory');
-            const nextBtn = document.querySelector('.memory-btn');
-            let currentMemory = 0;
-            
-            nextBtn.addEventListener('click', function() {
-                memories[currentMemory].classList.remove('active');
-                currentMemory = (currentMemory + 1) % memories.length;
-                memories[currentMemory].classList.add('active');
-                
-                // Add a little bounce effect to the button
-                nextBtn.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    nextBtn.style.transform = 'scale(1)';
-                }, 150);
-            });
-            
-            // Create floating stars
-            const starsContainer = document.querySelector('.stars');
-            const colors = ['#ff6b6b', '#7ec4cf', '#ffe074', '#c8a2f8', '#93e7ff'];
-            
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                
-                const size = Math.random() * 5 + 2;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.background = colors[Math.floor(Math.random() * colors.length)];
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 5}s`;
-                
-                starsContainer.appendChild(star);
-            }
-            
-            // Confetti effect
-            const confettiContainer = document.getElementById('confetti');
-            const celebrateBtn = document.querySelector('.celebrate-btn');
-            
-            celebrateBtn.addEventListener('click', function() {
-                // Enhanced confetti with more variety
-                for (let i = 0; i < 300; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.classList.add('confetti-piece');
-                    
-                    const size = Math.random() * 15 + 5;
-                    confetti.style.width = `${size}px`;
-                    confetti.style.height = `${size}px`;
-                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.position = 'absolute';
-                    confetti.style.top = '-10px';
-                    confetti.style.left = `${Math.random() * 100}%`;
-                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    
-                    // Add variety to confetti pieces
-                    const confettiType = Math.random();
-                    if (confettiType > 0.8) {
-                        confetti.innerHTML = '❤';
-                        confetti.style.backgroundColor = 'transparent';
-                        confetti.style.fontSize = `${size}px`;
-                        confetti.style.color = '#ff6b6b';
-                    } else if (confettiType > 0.6) {
-                        confetti.innerHTML = '🎉';
-                        confetti.style.backgroundColor = 'transparent';
-                        confetti.style.fontSize = `${size}px`;
-                    } else if (confettiType > 0.4) {
-                        confetti.innerHTML = '✨';
-                        confetti.style.backgroundColor = 'transparent';
-                        confetti.style.fontSize = `${size}px`;
-                        confetti.style.color = '#ffd700';
-                    }
-                    
-                    // Enhanced animation with more dynamic movement
-                    const animation = confetti.animate([
-                        { 
-                            top: '-10px', 
-                            transform: 'rotate(0deg) scale(1)', 
-                            opacity: 1 
-                        },
-                        { 
-                            top: '50%', 
-                            transform: `rotate(${Math.random() * 360}deg) scale(1.2)`, 
-                            opacity: 0.8 
-                        },
-                        { 
-                            top: '100%', 
-                            transform: `rotate(${Math.random() * 720}deg) scale(0.5)`, 
-                            opacity: 0 
-                        }
-                    ], {
-                        duration: Math.random() * 4000 + 3000,
-                        easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
-                    });
-                    
-                    confettiContainer.appendChild(confetti);
-                    
-                    // Remove element after animation completes
-                    animation.onfinish = () => {
-                        confetti.remove();
-                    };
-                }
-                
-                // Enhanced button animation with GSAP
-                gsap.to(celebrateBtn, {
-                    scale: 1.2,
-                    rotation: 5,
-                    duration: 0.3,
-                    ease: "back.out(1.7)",
-                    onComplete: () => {
-                        celebrateBtn.textContent = 'Yay! 🎉';
-                        gsap.to(celebrateBtn, {
-                            scale: 1,
-                            rotation: 0,
-                            duration: 0.5,
-                            delay: 0.5,
-                            onComplete: () => {
-                                celebrateBtn.textContent = 'Celebrate Again!';
-                            }
-                        });
-                    }
-                });
-                
-                // Create burst of floating hearts with GSAP
-                for (let i = 0; i < 30; i++) {
-                    const heart = document.createElement('div');
-                    heart.classList.add('floating-heart');
-                    heart.innerHTML = '❤';
-                    heart.style.left = `${Math.random() * 100}%`;
-                    heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
-                    heart.style.color = '#ff6b6b';
-                    heart.style.position = 'absolute';
-                    heart.style.fontSize = `${Math.random() * 20 + 15}px`;
-                    floatingHearts.appendChild(heart);
-                    
-                    // Animate hearts with GSAP
-                    gsap.fromTo(heart, 
-                        { 
-                            y: 0, 
-                            opacity: 0, 
-                            scale: 0,
-                            rotation: 0
-                        },
-                        {
-                            y: -200,
-                            opacity: 1,
-                            scale: 1,
-                            rotation: 360,
-                            duration: 3,
-                            ease: "power2.out",
-                            onComplete: () => heart.remove()
-                        }
-                    );
-                }
-                
-                // Add screen shake effect
-                gsap.to('body', {
-                    x: 10,
-                    duration: 0.1,
-                    repeat: 5,
-                    yoyo: true,
-                    ease: "power2.inOut"
-                });
-            });
-            
-            // Add bounce animation to arrow and click functionality
-            const bounceArrow = document.querySelector('.bounce-arrow');
-            bounceArrow.addEventListener('click', function() {
-                document.getElementById('memories').scrollIntoView({ 
-                    behavior: 'smooth' 
-                });
-            });
-            
-            setInterval(() => {
-                bounceArrow.style.transform = 'translateX(-50%) translateY(0)';
-                setTimeout(() => {
-                    bounceArrow.style.transform = 'translateX(-50%) translateY(10px)';
-                }, 500);
-            }, 1000);
-        });
-    </script>
+    <section class="memory-section" data-bg="light-yellow">
+        <div class="memory-content">
+            <div class="memory-text">
+                <h3>Little things I love about you</h3>
+                <p>Your infectious laugh, the way you care for others, your incredible strength, and that beautiful smile that can brighten any day 🌟</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="memory-section" data-bg="light-purple">
+        <div class="memory-content">
+            <div class="memory-text">
+                <h3>Wishes for your new year</h3>
+                <p>May this year bring you endless joy, amazing adventures, and all the happiness you deserve. You're going to do incredible things! 🚀</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Message Section -->
+    <section class="personal-message-section">
+        <div class="message-container">
+            <h3>A special message for you</h3>
+            <div class="typewriter-text" id="typewriter">
+                <!-- Text will be typed here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Surprise Section -->
+    <section class="final-section">
+        <div class="final-content">
+            <h2>Happy Birthday, Beautiful!</h2>
+            <p>Here's to another year of amazing memories together</p>
+            <div class="celebration-container">
+                <div class="balloon balloon-1">🎈</div>
+                <div class="balloon balloon-2">🎈</div>
+                <div class="balloon balloon-3">🎈</div>
+                <div class="balloon balloon-4">🎈</div>
+                <div class="balloon balloon-5">🎈</div>
+                <div class="balloon balloon-6">🎈</div>
+                <div class="balloon balloon-7">🎈</div>
+                <div class="balloon balloon-8">🎈</div>
+            </div>
+            <div class="confetti-container">
+                <div class="confetti confetti-1">🎊</div>
+                <div class="confetti confetti-2">🎊</div>
+                <div class="confetti confetti-3">🎊</div>
+                <div class="confetti confetti-4">🎊</div>
+                <div class="confetti confetti-5">🎊</div>
+                <div class="confetti confetti-6">🎊</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
